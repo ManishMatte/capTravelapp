@@ -1,0 +1,260 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:forms="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:fiori="sap.ui.webc.fiori"
+	xmlns:main="sap.ui.webc.main"
+	controllerName="travelapp.controller.object"
+	height="100%">
+
+	<ObjectPageLayout id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		upperCaseAnchorBar="false"
+		useIconTabBar="true">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<m:Title text="Travel Request" wrapping="true" />
+				</expandedHeading>
+
+				<snappedHeading>
+					<m:HBox>
+						<m:VBox>
+							<m:Avatar src="./test-resources/sap/uxap/images/imageID_275314.png" class="sapUiSmallMarginEnd" />
+						</m:VBox>
+
+						<m:VBox>
+							<m:Title text="Object Page Header with Links, Rating Indicator, and Object Status" wrapping="true"/>
+							<m:Label text="Example of an ObjectPage with header facet"/>
+						</m:VBox>
+					</m:HBox>
+				</snappedHeading>
+
+				<expandedContent>
+					<m:Label text="Example of an ObjectPage with header facet"/>
+				</expandedContent>
+
+				<snappedTitleOnMobile>
+					<m:Title text="Object Page Header with Links, Rating Indicator, and Object Status"/>
+				</snappedTitleOnMobile>
+
+				<!-- <actions>
+					<m:Button text="Edit" type="Emphasized" icon="sap-icon://edit" press="onPressEdit" visible="{= ${oModel>/editFlag} === false ? true : false}"/>
+					<m:Button text="Save" type="Success" visible="{oModel>/editFlag}" press="onPressSave"/> 
+					<m:Button text="Cancel" type="Negative" visible="{oModel>/editFlag}" press="onPressSave"/>
+				</actions> -->
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+				<m:Avatar src="./test-resources/sap/uxap/images/imageID_275314.png" class="sapUiMediumMarginEnd sapUiSmallMarginBottom" displaySize="L"/>
+
+				
+
+				<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+					<m:Title text="Contact Information" class="sapUiTinyMarginBottom" />
+
+					<m:HBox class="sapUiTinyMarginBottom">
+						<core:Icon src="sap-icon://account"/>
+						<m:Link text=" John Miller" class="sapUiSmallMarginBegin"/>
+					</m:HBox>
+
+					<m:HBox class="sapUiTinyMarginBottom">
+						<core:Icon src="sap-icon://outgoing-call"/>
+						<m:Link text=" +1 234 5678" class="sapUiSmallMarginBegin"/>
+					</m:HBox>
+
+					<m:HBox>
+						<core:Icon src="sap-icon://email"/>
+						<m:Link text="john.miller@company.com" class="sapUiSmallMarginBegin"/>
+					</m:HBox>
+				</m:VBox>
+
+				<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+					<m:HBox class="sapUiTinyMarginBottom">
+						<m:Label text="Created By:" class="sapUiSmallMarginEnd"/>
+						<m:Link text="Julie Armstrong" press="handleTitleSelectorPress"/>
+					</m:HBox>
+
+					<m:HBox class="sapUiTinyMarginBottom" renderType="Bare">
+						<m:Label text="Created On:" class="sapUiSmallMarginEnd"/>
+						<m:Text text=" February 20, 2020"/>
+					</m:HBox>
+
+					<m:HBox class="sapUiTinyMarginBottom">
+						<m:Label text="Changed By:" class="sapUiSmallMarginEnd"/>
+						<m:Link text="John Miller" press="handleTitleSelectorPress"/>
+					</m:HBox>
+
+					<m:HBox renderType="Bare">
+						<m:Label text="Changed On:" class="sapUiSmallMarginEnd"/>
+						<m:Text text=" February 20, 2020"/>
+					</m:HBox>
+				</m:VBox>
+
+
+				<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+					<m:Title class="sapUiTinyMarginBottom" text="Status"/>
+					<m:ObjectStatus text="{oModel>/payload/Status}" 
+					state="{= ${oModel>/payload/Status} === 'Compleated' ? 'Success' : ${oModel>/payload/Status} === 'Rejected' ? 'Error' : 'Warning'}" 
+					class="sapMObjectStatusLarge"/>
+				</m:VBox>
+
+				<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+					<m:Title text="Trip Start At" class="sapUiTinyMarginBottom" />
+					<m:ObjectStatus text="{oModel>/payload/TripbeginsAt}" class="sapMObjectStatusLarge"/>
+				</m:VBox>
+
+				<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+					<m:Title text="Trip Ends At" class="sapUiTinyMarginBottom" />
+					<m:ObjectStatus text="{oModel>/payload/TripendsAt}" class="sapMObjectStatusLarge"/>
+				</m:VBox>
+
+			</m:FlexBox>
+		</headerContent>
+
+		<sections >
+			<ObjectPageSection  anchorBarButtonColor="Negative" titleUppercase="false" id="goalsSection" title="2014 Goals Plan">
+				<subSections>
+					<ObjectPageSubSection id="goalsSectionSS1" title="Flight Details" titleUppercase="false">
+						<blocks>
+							<m:Table class="sapUxAPObjectPageSubSectionAlignContent"
+							 width="auto"
+								items="{
+								path: 'oModel>/payload/boarding'
+								}"
+								growing="true"
+								>
+								<m:headerToolbar>
+									<m:OverflowToolbar>
+									<m:Button icon="sap-icon://flight" enabled="false"/>
+										<m:Title text="Flight Details" level="H2" />
+										<m:ToolbarSpacer />
+										<m:OverflowToolbarButton tooltip="Add Flight Details"
+											text="Add"
+											icon="sap-icon://add"
+											press="onPressCreateFlightDetails"/>
+									</m:OverflowToolbar>
+								</m:headerToolbar>
+								<m:noData>
+									<fiori:IllustratedMessage name="NoData" titleText="No Flight Details Available">
+										<fiori:actions>
+											<main:Button icon="flight" text="Add New Flight Details" class="sapUiSmallMarginEnd" click="onPressCreateFlightDetails"/>
+										</fiori:actions>
+									</fiori:IllustratedMessage>
+								</m:noData>
+								<m:columns>
+									<m:Column>
+										<m:Text text="Passenger Name" />
+									</m:Column>
+									<m:Column minScreenWidth="Tablet" demandPopin="true">
+										<m:Text text="Flight No" />
+									</m:Column>
+									<m:Column minScreenWidth="Tablet" demandPopin="true">
+										<m:Text text="Flight From" />
+									</m:Column>
+									<m:Column  minScreenWidth="Tablet" demandPopin="true">
+										<m:Text text="Flight To" />
+									</m:Column>
+									<m:Column >
+										<m:Text text="Seat No" />
+									</m:Column>
+									<m:Column >
+										<m:Text text="Boarding Date" />
+									</m:Column>
+								</m:columns>
+
+								<m:items >
+									 <m:ColumnListItem type="Navigation" press="onPressFlightDetailsRow">
+										<m:cells>
+											<m:Text text="{oModel>passengerName}" />
+											<m:Text text="{oModel>flightNo}" />
+											<m:Text text="{oModel>flightFrom}" />
+											<m:Text text="{oModel>flightTo}" />
+											<m:Text text="{oModel>seatNo}" />
+											<m:Text text="{oModel>boardingDate}" />
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection anchorBarButtonColor="Positive" titleUppercase="false" id="personalSection" title="Personal" importance="Medium">
+				<subSections>
+					<ObjectPageSubSection id="personalSectionSS1" title="Hotel Details" titleUppercase="false">
+						<blocks>
+							<m:Table class="sapUxAPObjectPageSubSectionAlignContent"
+							 width="auto"
+								items="{
+								path: 'oModel>/payload/hotel'
+								}"
+								growing="true"
+								>
+								<m:headerToolbar>
+									<m:OverflowToolbar>
+									<m:Button icon="sap-icon://home" enabled="false"/>
+										<m:Title text="Hotel Details" level="H2" />
+										<m:ToolbarSpacer />
+										<m:OverflowToolbarButton tooltip="Add Hotel Details"
+											text="Add"
+											icon="sap-icon://add"
+											press="onPressCreateHotelDetails"/>
+									</m:OverflowToolbar>
+								</m:headerToolbar>
+								<m:noData>
+									<fiori:IllustratedMessage name="NoData" titleText="No Hotel Details Available">
+										<fiori:actions>
+											<main:Button icon="home" text="Add New Hotel Details" class="sapUiSmallMarginEnd" click="onPressCreateHotelDetails"/>
+										</fiori:actions>
+									</fiori:IllustratedMessage>
+								</m:noData>
+								<m:columns>
+									<m:Column>
+										<m:Text text="GST State" />
+									</m:Column>
+									<m:Column minScreenWidth="Tablet" demandPopin="true">
+										<m:Text text="Hotel Name" />
+									</m:Column>
+									<m:Column minScreenWidth="Tablet" demandPopin="true">
+										<m:Text text="Hotel Email" />
+									</m:Column>
+									<m:Column  minScreenWidth="Tablet" demandPopin="true">
+										<m:Text text="Room Type" />
+									</m:Column>
+									<m:Column >
+										<m:Text text="Number Of Guests" />
+									</m:Column>
+									<m:Column >
+										<m:Text text="Check In Date/Time" />
+									</m:Column>
+									<m:Column >
+										<m:Text text="Check Out Date/Time" />
+									</m:Column>
+								</m:columns>
+
+								<m:items >
+									 <m:ColumnListItem type="Navigation" press="onPressHotelDetailsRow">
+										<m:cells>
+											<m:Text text="{oModel>gstState}" />
+											<m:Text text="{oModel>name}" />
+											<m:Text text="{oModel>email}" />
+											<m:Text text="{oModel>roomType}" />
+											<m:Text text="{oModel>noofGuest}" />
+											<m:Text text="{oModel>checkIn}" />
+											<m:Text text="{oModel>checkOut}" />
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+    <Dialog showHeader="false">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormChange354"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Boarding Pass Details"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+
+				<Label text="Passenger Name" />
+				<Input value="{oModel>/BoardingPass/passengerName}" />
+                <Label text="Flight No" />
+				<Input value="{oModel>/BoardingPass/flightNo}" />
+                <Label text="Flight From" />
+				<Input value="{oModel>/BoardingPass/flightFrom}" />
+                <Label text="Flight To" />
+				<Input value="{oModel>/BoardingPass/flightTo}" />
+                <Label text="Seat No" />
+				<Input value="{oModel>/BoardingPass/seatNo}" />
+                <Label text="Boarding Date" />
+				<DateTimePicker value="{
+					path : 'oModel>/BoardingPass/boardingDate',
+					type : 'sap.ui.model.odata.type.DateTime'
+				}"
+                displayFormat="dd MMM, yyyy HH:mm"/>
+				
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+    <footer>
+        <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button text="Save" type="Accept" press="onPressSaveFlightDetails" icon="sap-icon://save"/>
+            <Button text="Cancel" type="Reject" press="onPressCancelFlightDetails" icon="sap-icon://cancel" />
+        </OverflowToolbar>
+		</footer>
+    </Dialog>
+</core:FragmentDefinition>

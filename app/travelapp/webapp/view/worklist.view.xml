@@ -1,0 +1,61 @@
+<mvc:View
+	controllerName="travelapp.controller.worklist"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Table id="TravelRequestTableId"
+		inset="false"
+		items="{
+			path: '/TravelRequest'
+		}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="Travel Requests" level="H2"/>
+					<ToolbarSpacer />
+					
+					<Button text="New Travel Request" type="Emphasized" icon="sap-icon://add" press="onPressCreateTravelRequest"/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+        <noData>
+        <IllustratedMessage ></IllustratedMessage>
+        </noData>
+		<columns>
+			<Column>
+				<Text text="Trip Number" />
+			</Column>
+			<Column>
+				<Text text="Travel Type" />
+			</Column>
+			<Column minScreenWidth="Tablet">
+				<Text text="Start Date" />
+			</Column>
+			<Column minScreenWidth="Tablet">
+				<Text text="End Date" />
+			</Column>
+			<Column
+				hAlign="End">
+				<Text text="Status" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle" type="Navigation" press="onRowPress">
+				<cells>
+					<ObjectIdentifier
+						title="{TripNumber}"
+						text="{TravelType}"/>
+						<Text
+						text="{TravelType}" />
+					<Text
+						text="{TripbeginsAt}" />
+					<Text
+						text="{TripendsAt}" />
+                    <ObjectStatus
+						text="{Status}"
+						state="{= ${Status} === 'Compleated' ? 'Success' : ${Status} === 'Rejected' ? 'Error' : 'Warning'}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</mvc:View>

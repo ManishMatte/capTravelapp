@@ -1,0 +1,67 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+    <Dialog showHeader="false">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Boarding Pass Details"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+
+				<Label text="GST State" />
+				<Input value="{oModel>/HotelBooking/gstState}" />
+                <Label text="Hotel Name" />
+				<Input value="{oModel>/HotelBooking/name}" />
+                <Label text="Hotel Email" />
+				<Input value="{oModel>/HotelBooking/email}" />
+                <Label text="Room Type" />
+				<Input value="{oModel>/HotelBooking/roomType}" />
+                <Label text="Number Of Guests" />
+				<Input value="{oModel>/HotelBooking/noofGuest}" type="Number" />
+                <Label text="Check In At" />
+				<DateTimePicker value="{
+					path : 'oModel>/HotelBooking/checkIn',
+					type : 'sap.ui.model.odata.type.DateTime',
+						formatOptions: {
+						style: 'medium'
+						}
+				}"
+                />
+				<Label text="Check Out At" />
+				<DateTimePicker value="{
+					path : 'oModel>/HotelBooking/checkOut',
+					type : 'sap.ui.model.odata.type.DateTime',
+						formatOptions: {
+						style: 'medium'
+						}
+				}"
+                />
+				
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+    <footer>
+        <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button text="Save" type="Accept" press="onPressSaveHotelDetails" icon="sap-icon://save"/>
+            <Button text="Cancel" type="Reject" press="onPressCancelHotelDetails" icon="sap-icon://cancel" />
+        </OverflowToolbar>
+		</footer>
+    </Dialog>
+</core:FragmentDefinition>

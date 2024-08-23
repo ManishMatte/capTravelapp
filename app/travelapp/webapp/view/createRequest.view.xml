@@ -1,0 +1,84 @@
+<mvc:View
+	controllerName="travelapp.controller.createRequest"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" >
+    <Page >
+	<VBox class="sapUiSmallMargin">
+		<f:Form id="FormToolbar"
+			editable="true"
+			ariaLabelledBy="Title1">
+
+			<f:layout>
+				<f:ColumnLayout
+					 />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer ariaLabelledBy="Title2">
+					<f:toolbar>
+						<Toolbar>
+							<Title id="Title2" text="New Travel Request"/>
+						</Toolbar>
+					</f:toolbar>
+					<f:formElements>
+						<f:FormElement label="Travel Type">
+							<f:fields>
+								<Select width="100%" selectedKey="{oModel>/payload/TravelType}">
+									<items>
+										<core:Item text="Domestic" key="Domestic"/>
+										<core:Item text="International" key="International"/>
+										<core:Item text="Other" key="Other"/>
+									</items>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Destination">
+							<f:fields>
+								<Input value="{oModel>/payload/Destination}" />
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Country">
+							<f:fields>
+								<Text text="{oModel>/payload/Country}"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Status">
+							<f:fields>
+								<Text text="{oModel>/payload/Status}"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Trip Begins At">
+							<f:fields>
+								<DatePicker value="{oModel>/payload/TripbeginsAt}"
+                                displayFormat="dd MMM yyyy"
+                                valueFormat="YYYY-MM-dd"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Trip Ends At">
+							<f:fields>
+								<DatePicker value="{oModel>/payload/TripendsAt}"
+                                displayFormat="dd MMM yyyy"
+                                valueFormat="YYYY-MM-dd"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Subactivities">
+							<f:fields>
+								<TextArea rows="3" value="{oModel>/payload/SubActivity}"/>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+	</VBox>
+    <footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Submit" press="onPressSubmitRequest"/>
+				<Button type="Reject" text="Cancel" press="onPressCancelRequest"/>
+			</OverflowToolbar>
+		</footer>
+    </Page>
+</mvc:View>

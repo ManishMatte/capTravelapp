@@ -1,0 +1,17 @@
+### post travel request
+POST http://localhost:4004/odata/v4/my/
+Content-Type: application/json
+
+{
+    "TripNumber": 1001,
+    "TravelType": "Domestic",
+    "Destination": "Deli",
+    "Country": "India",
+    "Status": "Open",
+    "StartDate": "2024-08-21",
+    "EndDate": "2024-08-21",
+    "TotalCost": 1200,
+    "TripbeginsAt": "2024-08-14",
+    "TripendsAt": "2024-08-21",
+    "SubActivity": "Nothing"
+}

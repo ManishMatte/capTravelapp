@@ -1,0 +1,1 @@
+using hpcl.srv.MyService as service from '../../srv/service';
