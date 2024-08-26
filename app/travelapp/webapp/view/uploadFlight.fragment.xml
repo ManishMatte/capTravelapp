@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+		height="100%"
+		xmlns:core="sap.ui.core"
+		xmlns="sap.m"
+		xmlns:upload="sap.m.upload">
+	<Dialog title="Upload boarding pass">
+		<upload:UploadSet
+			id="UploadSet"
+			mediaTypes="application/pdf,image/png,image/jpeg,image/jpg"
+			/>
+			<footer>
+        <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button text="Save" type="Accept" press="onPressSaveUploadFlight" icon="sap-icon://save"/>
+            <Button text="Cancel" type="Reject" press="onPressCancelUploadFlightDetails" icon="sap-icon://cancel" />
+        </OverflowToolbar>
+		</footer>
+	</Dialog>
+</core:FragmentDefinition>

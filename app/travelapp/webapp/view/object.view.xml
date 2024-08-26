@@ -136,6 +136,10 @@
 											text="Add"
 											icon="sap-icon://add"
 											press="onPressCreateFlightDetails"/>
+										<m:OverflowToolbarButton tooltip="Upload Boarding Pass"
+											text="Upload"
+											icon="sap-icon://upload"
+											press="onPressUploadFlightDetails"/>
 									</m:OverflowToolbar>
 								</m:headerToolbar>
 								<m:noData>
