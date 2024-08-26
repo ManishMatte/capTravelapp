@@ -4,13 +4,13 @@ module.exports = function (server) {
   server.on("PostOCR", async function (req, res) {
     const formData = new FormData(),
       {
-        data: { content, name },
+        data: { document, name },
       } = req;
 
-    if (!content) return 0;
+    if (!document) return 0;
     if (!name) return 0;
 
-    const buffer = _DataURIToBlob(content);
+    const buffer = _DataURIToBlob(document);
 
     formData.append("file", buffer, name);
     formData.append(
