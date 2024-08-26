@@ -345,21 +345,26 @@ sap.ui.define([
 
             },
             onPressSaveUploadFlight: function () {
+                const that = this;
                 const serviceUrl = this.getOwnerComponent().getModel().getServiceUrl();
                 const uploadSet = sap.ui.getCore().byId('UploadSet');
                 const items = uploadSet.getItems();
+                const aName = items[0].getFileName();
                 this.getBase64(items[0].getFileObject()).then(function(data){
                     // console.log(data)
 
                     $.ajax({
-                        url: serviceUrl + `HotelBooking?$filter=req_ID eq ${ID}`,
+                        url: "/rest/attachment/PostOCR",
                         method: "POST",
+                        contentType:"application/json",
                         data: JSON.stringify({
-                            "document":data
+                            "document":data,
+                            "name": aName
                         }),
                         success: function (response, statusText, xhrToken) {
 
-                            that.getView().getModel('oModel').setProperty('/payload/hotel', response.value)
+                            MessageBox.success("Attachment Uploaded.");
+                            that.onPressCancelUploadFlightDetails();
 
                         },
                         error: function (errMsg) {
@@ -393,6 +398,7 @@ sap.ui.define([
                 }
                 this.getView().addDependent(this.oUploadFlight);
                 this.oUploadFlight.close();
+                sap.ui.getCore().byId('UploadSet').removeAllItems();
 
             }
         });
