@@ -39,7 +39,8 @@
 					path : 'oModel>/BoardingPass/boardingDate',
 					type : 'sap.ui.model.odata.type.DateTime'
 				}"
-                displayFormat="dd MMM, yyyy HH:mm"/>
+                displayFormat="dd MMM, yyyy HH:mm"
+				/>
 				
 			</f:content>
 		</f:SimpleForm>

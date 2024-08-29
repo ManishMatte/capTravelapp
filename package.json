@@ -8,7 +8,8 @@
   "dependencies": {
     "@sap/cds": "^7",
     "axios": "^1.7.5",
-    "express": "^4"
+    "express": "^4",
+    "@cap-js/hana": "^1"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
@@ -30,6 +31,9 @@
     "app/travelreq"
   ],
   "cds": {
+    "requires": {
+      "db":"hana"
+    },
     "server": {
       "body_parser": {
         "limit": "1mb"

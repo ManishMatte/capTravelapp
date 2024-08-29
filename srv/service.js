@@ -16,9 +16,10 @@ module.exports = function (server) {
     formData.append(
       "options",
       JSON.stringify({
-        schemaId: "cf8cc8a9-1eee-42d9-9a3e-507a61baac23",
+        schemaId: "f03ffc60-1d71-4023-8f97-baa2555b04b9",
         clientId: "default",
-        documentType: "invoice",
+        documentType: "custom",
+        templateId:"a6cab4af-b5a1-4d98-bc2d-bbdabd162378",
         receivedDate: new Date().toISOString().split("T")[0],
       })
     );

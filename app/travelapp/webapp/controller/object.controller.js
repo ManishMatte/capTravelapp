@@ -156,6 +156,10 @@ sap.ui.define([
                 let payload = oModel.getProperty('/BoardingPass');
                 payload.req_ID = oModel.getProperty('/payload/ID');
 
+                // payload.boardingDate = payload.boardingDate.toISOString().split('.')[0];
+                payload.boardingDate = payload.boardingDate.toISOString();
+
+
                 if (payload.ID !== undefined && payload.ID !== null && payload.ID !== '') {
 
                     $.ajax({
@@ -363,9 +367,11 @@ sap.ui.define([
                         }),
                         success: function (response, statusText, xhrToken) {
 
+                            const AttachId = response.id;
                             MessageBox.success("Attachment Uploaded.");
                             that.onPressCancelUploadFlightDetails();
-
+                            that.getView().setBusy(true);
+                            that.getOCRAttachments(AttachId);
                         },
                         error: function (errMsg) {
                             MessageBox.error("Something Went Wrong.");
@@ -374,6 +380,85 @@ sap.ui.define([
                     });
 
                 });
+            },
+            getOCRAttachments : function(ID){
+                const that = this;
+                let count = 1;
+                $.ajax({
+                    url: `/rest/attachment/GetOCR(ID=${ID})`,
+                    method: "GET",
+                    success: function (response, statusText, xhrToken) {
+
+                        that.postFlightDataFromAttachment(response.extraction.headerFields,ID);
+
+                    },
+                    error : function(e){
+                        if(count > 5){
+                            throw 'Error is '+ e.toString();
+                        }
+
+                        count++;
+
+                        that.getOCRAttachments(ID);
+
+                    }
+
+                });
+            },
+            postFlightDataFromAttachment:function(data,ID){
+                
+            let payload = {
+                passengerName: "",
+                flightNo: "",
+                flightFrom: "",
+                flightTo: "",
+                seatNo: "",
+                boardingDate: null,
+                attachmentId: ID,
+                req_ID: this.getView().getModel('oModel').getProperty('/payload/ID')
+            }
+
+                for(let i = 0 ;i < data.length; i ++){
+
+                    if(data[i].name === "passenger"){
+                        payload.passengerName = data[i].value;
+                    }
+                    if(data[i].name === "from"){
+                        payload.flightFrom = data[i].value;
+                    }
+                    if(data[i].name === "flight"){
+                        payload.flightNo = data[i].value;
+                    }
+                    if(data[i].name === "seat"){
+                        payload.seatNo = data[i].value;
+                    }
+
+                }
+                const that = this;
+                const serviceUrl = this.getOwnerComponent().getModel().getServiceUrl();
+                $.ajax({
+                    url: serviceUrl + "BoardingPass",
+                    method: "POST",
+                    data: JSON.stringify(payload),
+                    contentType: "application/json",
+                    success: function (data) {
+                        that.getView().setBusy(false);
+                        MessageBox.success("Flight Details Saved Successfully.", {
+                            actions: ["Ok"],
+                            emphasizedAction: "Ok",
+                            onClose: function () {
+                                that.refreshObjectModel('flight', payload.req_ID);
+                            },
+                            dependentOn: that.getView()
+                        });
+
+                    },
+                    error: function (errMsg) {
+                        MessageBox.error("Something Went Wrong.");
+                    }
+
+                });
+
             },
             getBase64: function (file) {
                 var reader = new FileReader();
